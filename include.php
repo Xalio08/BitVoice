@@ -3,8 +3,6 @@
 
 //URLs
 $blockchain_root = "https://blockchain.info/"; 
-$mysite_root = "http://mysite.com/";
-$secret = "CHANGE_TO_RANDOM_SECRET";
 
 
 //Database local
