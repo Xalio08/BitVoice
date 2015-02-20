@@ -93,7 +93,6 @@
     </script>   
 
     <script type="text/javascript">
-
         //Calling the generator when the button is pressed. We want to create a new invoice
         $("#generateButton").click(function(){
             var currency = $("#currency").val();
@@ -104,12 +103,10 @@
                 $.ajax({
                     type: "GET",
                     url: "generator.php",
-                    data: { amount: amount, 
+                    data: {amount: amount, 
                         currency: currency},
                     success: function(response){
-                        d=document.createElement('div');
-                        $(d).html(response)
-                        .appendTo($("#generated")) //main div
+                        $("#generated").append(response);
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.log(JSON.stringify(jqXHR));
@@ -117,26 +114,6 @@
                     }
                 });
             }
-        });
-    </script>
-
-    <script type="text/javascript">
-
-        //Script calling the generator when a resfresh button is pressed
-        $(".btn-refresh").click(function(){
-            var invoiceId = $(this).prev().val();
-            $.ajax({
-                type: "GET",
-                url: "generator.php",
-                data: { invoice_id: invoiceId},
-                success: function(response){
-                    $('#'+invoiceId).html(response);
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(JSON.stringify(jqXHR));
-                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-                }
-            });
         });
     </script>
   </body>

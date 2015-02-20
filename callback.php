@@ -18,8 +18,8 @@ if(isset($_GET["invoice_id"])){
   if($invoice!=null){
 
     //Updating the amount 
-    if($invoice->getLeftAmount()-$value_in_btc>=0)
-      $leftAmount=$invoice->getLeftAmount()-$value_in_btc;
+    if($invoice->getLeftAmount()-$valueInBtc>=0)
+      $leftAmount=$invoice->getLeftAmount()-$valueInBtc;
     else
       $leftAmount=0;
     $invoice->setLeftAmount($leftAmount);//Check, must be >0

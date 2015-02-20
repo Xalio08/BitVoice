@@ -1,5 +1,5 @@
 <!-- View displaying a paid invoice, called by the generator-->
-<div class="col-sm-6 col-md-6 col-lg-4 ">
+<div class="col-sm-6 col-md-6 col-lg-5 ">
     <div class="account-wall">
         <h3 class="text-center"> Invoice Paid</h3>
           <div>

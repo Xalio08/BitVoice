@@ -9,7 +9,7 @@ class Invoice{
 
     const BITCOIN_ADDRESS = "1PyHmhotZJu4ULjnzQyCdEt8FAZBTe4Ywx";
     const ROOTURL = 'https://blockchain.info/api/receive';
-    const CALLBACK = 'https://pacific-sea-8869.herokuapp.com/callback.php';
+    const CALLBACK = 'http://astraliagency.fr/Bitvoice/callback.php';
     
     /**
      * Gets the value of totalAmount.
@@ -177,8 +177,8 @@ class Invoice{
 
     private function GenerateAddress(){
         //Generation of a new bitcoin address based on the one provided. All the bitcoins are redirected toward the BITCOIN_ADDRESS constant
-        $callback_url=self::ROOTURL."?".$this->invoiceId;
-        $parameters = 'method=create&address=' . self::BITCOIN_ADDRESS .'&callback='. urlencode(self::CALLBACK);
+        $callback_url=self::CALLBACK."?invoice_id=".$this->invoiceId;
+        $parameters = 'method=create&address=' . self::BITCOIN_ADDRESS .'&callback='. urlencode($callback_url);
         $response = file_get_contents( self::ROOTURL. '?' . $parameters);
         $object = json_decode($response);
 
@@ -195,6 +195,13 @@ class Invoice{
             'destination_address'=>$this->destinationAddress,
             'state'=>$this->state,
             'expiration_date'=>$this->expirationDate));
+        $req->closeCursor();
+    }
+
+    public function deleteInvoice($db){
+        //Deleting an invoice object
+        $req = $db->prepare('DELETE FROM invoices  WHERE invoice_id=:invoice_id');
+        $req->execute(array('invoice_id' => $this->invoiceId));
         $req->closeCursor();
     }
 
@@ -231,8 +238,8 @@ class Invoice{
         $req->closeCursor();
     }
 
-/*
-    public static function getAllId($db){
+
+    public static function getAllIds($db){
         $response= array();
         $stmt = $db->prepare("SELECT invoice_id FROM invoices");
         if ($stmt->execute() ){
@@ -242,6 +249,5 @@ class Invoice{
             return $response;
         }
     }
-    */
 }
 

@@ -1,6 +1,6 @@
 <!-- Page displaying an expired invoice, called by the generator-->
 
-<div class="col-sm-6 col-md-6 col-lg-4 ">
+<div class="col-sm-12 col-md-6 col-lg-5">
   <div class="account-wall">
     <h3 class="text-center"> Invoice expired</h3>
     <div>

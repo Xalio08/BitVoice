@@ -17,12 +17,17 @@ if(isset($_GET["invoice_id"])){
 
     //According to the state of the database, displaying a different view
 
-    if($invoice->getState()=="paid")//The invoice has been completely paid
-        include("paid.php");
-    else if($invoice->getState()=="expired")//The invoice has expired
-        include("expired.php");
-    else//The invoice has been partially paid
-        include("partial.php");
+    if($_GET["action"]=="display"){//We want the details of the invoice. This method is called by the refresh script and the admin board
+        if($invoice->getState()=="paid")//The invoice has been completely paid
+            include("paid.php");
+        else if($invoice->getState()=="expired")//The invoice has expired
+            include("expired.php");
+        else//The invoice has been partially paid
+            include("partial.php");
+    }
+    else if($_GET["action"]=="delete"){//Called from the admin board to delete an invoice
+        $invoice->deleteInvoice($db);
+    }
 }
 
 else{//There is no id in the request, we have to create a new invoice
